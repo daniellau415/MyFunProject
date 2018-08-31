@@ -11,24 +11,26 @@ import UIKit
 
 class FaqListViewController : UIViewController {
     
-
+    //MARK: - Outlets
     @IBOutlet var faqTableView: UITableView!
     
-    @IBAction func buttonRequest(_ sender: Any) {
+    //MARK: - LifeCycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        faqTableView.delegate = self
+        faqTableView.dataSource = self
+        fetchFAQ()
+    }
+    
+    func fetchFAQ() {
         FaqController.shared.createRequest { (_) in
             DispatchQueue.main.async {
                 self.faqTableView.reloadData()
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        faqTableView.delegate = self
-        faqTableView.dataSource = self
-    }
 }
-
+    //MARK: - TableView Datasource and Delegates
 extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,7 +50,7 @@ extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! FaqCell
             let questions = FaqController.shared.questAns[indexPath.section]
-            cell.faqLabel.text = questions.key
+            cell.faqLabel.text = questions.key            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! FaqCell
@@ -65,14 +67,16 @@ extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
                     FaqController.shared.questAns[indexPath.section].opened = false
                     let sections = IndexSet.init(integer: indexPath.section)
                     tableView.reloadSections(sections, with: .fade)
-                    print("this tapped")
                 } else {
                     FaqController.shared.questAns[indexPath.section].opened = true
                     let sections = IndexSet.init(integer: indexPath.section)
                     tableView.reloadSections(sections, with: .fade)
-                    print("other tapped")
                 }
             }
     
         }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }
