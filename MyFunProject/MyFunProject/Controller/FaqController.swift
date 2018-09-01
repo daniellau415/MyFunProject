@@ -62,45 +62,4 @@ class FaqController {
     
     }
     
-    
-    
-//    func createRequest(completion: @escaping([Faq]?) -> Void) {
-//        let loginString = String(format: "%@:%@", username, password)
-//        let loginData = loginString.data(using: String.Encoding.utf8)!
-//        let base64LoginString = loginData.base64EncodedString()
-//
-//        let url = URL(string: "https://prep2.gw.gocopia.com/prep/faq")!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "GET"
-//        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-//        request.addValue(password, forHTTPHeaderField: username)
-//
-//        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
-//
-//            if let data = data {
-//                let jsonDecoder = JSONDecoder()
-//                do {
-//                    let decodedData = try jsonDecoder.decode(resultDictionary.self, from: data)
-//
-//
-//                } catch let error {
-//                    print(error.localizedDescription, "error decoding")
-//                }
-//            }
-//
-//            if let response = response {
-//                print("got response", response)
-//            }
-//
-//            if let error = error {
-//                print("error", error.localizedDescription)
-//            }
-//
-//
-//        }
-//        dataTask.resume()
-//
-//    }
-//
-//}
-//
+

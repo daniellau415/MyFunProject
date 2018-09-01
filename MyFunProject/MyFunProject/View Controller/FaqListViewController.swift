@@ -12,13 +12,19 @@ import UIKit
 class FaqListViewController : UIViewController {
     
     //MARK: - Outlets
+    
     @IBOutlet var faqTableView: UITableView!
     
+    //Mark: Properties
+    var isSelectedMode = false
+    
     //MARK: - LifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         faqTableView.delegate = self
         faqTableView.dataSource = self
+        faqTableView.separatorStyle = .none
         fetchFAQ()
     }
     
@@ -30,13 +36,52 @@ class FaqListViewController : UIViewController {
         }
     }
 }
+
+
+//extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return FaqController.shared.questAns.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! FaqCell
+//        let questions = FaqController.shared.questAns[indexPath.row]
+//        cell.faqLabel.text = questions.key
+//        cell.answerLabel.isHidden = true
+//        cell.answerLabel.text = questions.theValue[0]
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        let cell = faqTableView.cellForRow(at: indexPath) as! FaqCell
+//
+//        if cell.isSelected == true {
+//            cell.answerLabel.isHidden = false
+//            cell.answerLabel.isHighlighted = true
+//        } else {
+//
+//        }
+////     faqTableView.reloadRows(at: [indexPath], with: .automatic)
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        return 150
+//    }
+//
+//}
+
     //MARK: - TableView Datasource and Delegates
+
 extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return FaqController.shared.questAns.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if FaqController.shared.questAns[section].opened == true {
             return FaqController.shared.questAns[section].theValue.count + 1
@@ -44,13 +89,13 @@ extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dataIndex = indexPath.row - 1
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! FaqCell
             let questions = FaqController.shared.questAns[indexPath.section]
-            cell.faqLabel.text = questions.key            
+            cell.faqLabel.text = questions.key
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! FaqCell
@@ -59,24 +104,25 @@ extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    
+
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+
             if indexPath.row == 0 {
                 if FaqController.shared.questAns[indexPath.section].opened == true {
                     FaqController.shared.questAns[indexPath.section].opened = false
                     let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .fade)
+                    tableView.reloadSections(sections, with: .automatic)
                 } else {
                     FaqController.shared.questAns[indexPath.section].opened = true
                     let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .fade)
+                    tableView.reloadSections(sections, with: .automatic)
                 }
             }
-    
         }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
+
+
 }
