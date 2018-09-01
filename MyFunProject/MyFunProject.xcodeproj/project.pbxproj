@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		98AAF818E80669F520A09B05 /* Pods_MyFunProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00185902ADED2261F5AC46B1 /* Pods_MyFunProject.framework */; };
 		B30DE551213A0016000EE6DF /* FaqCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE550213A0016000EE6DF /* FaqCell.swift */; };
+		B30DE555213A39A3000EE6DF /* FaqCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE554213A39A3000EE6DF /* FaqCollectionViewController.swift */; };
+		B30DE557213A39D2000EE6DF /* FaqCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE556213A39D2000EE6DF /* FaqCollectionViewCell.swift */; };
+		B30DE559213A5ECC000EE6DF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE558213A5ECC000EE6DF /* Extensions.swift */; };
 		B3DABDCD21399D700046E3A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DABDCC21399D700046E3A4 /* AppDelegate.swift */; };
 		B3DABDD221399D700046E3A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3DABDD021399D700046E3A4 /* Main.storyboard */; };
 		B3DABDD421399D710046E3A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DABDD321399D710046E3A4 /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 		00185902ADED2261F5AC46B1 /* Pods_MyFunProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFunProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC720AA3EA2A0072E57E6E /* Pods-MyFunProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFunProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFunProject/Pods-MyFunProject.debug.xcconfig"; sourceTree = "<group>"; };
 		B30DE550213A0016000EE6DF /* FaqCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqCell.swift; sourceTree = "<group>"; };
+		B30DE554213A39A3000EE6DF /* FaqCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqCollectionViewController.swift; sourceTree = "<group>"; };
+		B30DE556213A39D2000EE6DF /* FaqCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqCollectionViewCell.swift; sourceTree = "<group>"; };
+		B30DE558213A5ECC000EE6DF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B3DABDC921399D6F0046E3A4 /* MyFunProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFunProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DABDCC21399D700046E3A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3DABDD121399D700046E3A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +106,7 @@
 				B3DABDD321399D710046E3A4 /* Assets.xcassets */,
 				B3DABDD521399D710046E3A4 /* LaunchScreen.storyboard */,
 				B3DABDD821399D710046E3A4 /* Info.plist */,
+				B30DE558213A5ECC000EE6DF /* Extensions.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -124,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				B3DABDE32139A0D40046E3A4 /* FaqListViewController.swift */,
+				B30DE554213A39A3000EE6DF /* FaqCollectionViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -133,6 +141,7 @@
 			children = (
 				B3DABDD021399D700046E3A4 /* Main.storyboard */,
 				B30DE550213A0016000EE6DF /* FaqCell.swift */,
+				B30DE556213A39D2000EE6DF /* FaqCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -266,7 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3DABDE42139A0D40046E3A4 /* FaqListViewController.swift in Sources */,
+				B30DE555213A39A3000EE6DF /* FaqCollectionViewController.swift in Sources */,
 				B3DABDCD21399D700046E3A4 /* AppDelegate.swift in Sources */,
+				B30DE559213A5ECC000EE6DF /* Extensions.swift in Sources */,
+				B30DE557213A39D2000EE6DF /* FaqCollectionViewCell.swift in Sources */,
 				B3DABDE82139A1FE0046E3A4 /* FaqController.swift in Sources */,
 				B30DE551213A0016000EE6DF /* FaqCell.swift in Sources */,
 				B3DABDE62139A1800046E3A4 /* Faq.swift in Sources */,
