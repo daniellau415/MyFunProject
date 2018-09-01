@@ -25,7 +25,7 @@ class FaqListViewController : UIViewController {
         faqTableView.delegate = self
         faqTableView.dataSource = self
         faqTableView.separatorStyle = .none
-        fetchFAQ()
+//        fetchFAQ()
     }
     
     func fetchFAQ() {
@@ -37,42 +37,6 @@ class FaqListViewController : UIViewController {
     }
 }
 
-
-//extension FaqListViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return FaqController.shared.questAns.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! FaqCell
-//        let questions = FaqController.shared.questAns[indexPath.row]
-//        cell.faqLabel.text = questions.key
-//        cell.answerLabel.isHidden = true
-//        cell.answerLabel.text = questions.theValue[0]
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        let cell = faqTableView.cellForRow(at: indexPath) as! FaqCell
-//
-//        if cell.isSelected == true {
-//            cell.answerLabel.isHidden = false
-//            cell.answerLabel.isHighlighted = true
-//        } else {
-//
-//        }
-////     faqTableView.reloadRows(at: [indexPath], with: .automatic)
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        return 150
-//    }
-//
-//}
 
     //MARK: - TableView Datasource and Delegates
 
