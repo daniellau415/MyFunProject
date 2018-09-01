@@ -13,7 +13,7 @@ class FaqCollectionViewCell: UICollectionViewCell {
     
     let questionLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -21,7 +21,7 @@ class FaqCollectionViewCell: UICollectionViewCell {
     
     let answerLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -30,7 +30,7 @@ class FaqCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = UIColor(hexString: "#a0dbbd")
         setupLayout()
     }
     
@@ -46,23 +46,18 @@ class FaqCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(questionLabel)
         contentView.addSubview(answerLabel)
         
-        questionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        questionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+//        questionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+//        questionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+//        questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+       
+        
+        questionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
+        questionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
+        questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         questionLabel.bottomAnchor.constraint(equalTo: answerLabel.topAnchor).isActive = true
         
-        //        questionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        //        questionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        //        questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
-        
-        
-        //        answerLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        //        answerLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        //        answerLabel.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 20).isActive = true
-        //        answerLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
-        
-        answerLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        answerLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        answerLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
+        answerLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         answerLabel.topAnchor.constraint(equalTo: questionLabel.bottomAnchor).isActive = true
         answerLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
@@ -74,8 +69,10 @@ class FaqCollectionViewCell: UICollectionViewCell {
         didSet {
             if self.isSelected {
                 answerLabel.isHidden = false
+                self.backgroundColor = UIColor(hexString: "#5cbc8b")
             } else {
                 answerLabel.isHidden = true
+                self.backgroundColor = UIColor(hexString: "#a0dbbd")
             }
         }
     }

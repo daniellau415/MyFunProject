@@ -13,11 +13,21 @@ private let reuseIdentifier = "collectionCell"
 
 class FaqCollectionViewController: UICollectionViewController {
     
+    lazy var searchBar : UISearchBar = {
+        let sb = UISearchBar()
+        sb.placeholder = "Search"
+        sb.barTintColor = UIColor(hexString: "#edefee")
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.white
+        sb.delegate = self
+        sb.translatesAutoresizingMaskIntoConstraints = false
+        return sb
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(FaqCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         navigationItem.title = "TroubleShoot"
-        
+        setupViews()
         fetchFAQ()
     }
     
@@ -28,10 +38,31 @@ class FaqCollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+    func setupViews() {
+        collectionView?.backgroundColor = UIColor(hexString: "#edefee")
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.keyboardDismissMode = .onDrag
+        collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerCellId")
+    }
 }
 
 
 extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 40)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerCellId", for: indexPath)
+        header.addSubview(searchBar)
+        searchBar.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -10).isActive = true
+        return header
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return FaqController.shared.questAns.count
@@ -58,7 +89,7 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      
+        
         
         switch collectionView.indexPathsForSelectedItems?.first {
         case .some(indexPath):
@@ -69,6 +100,11 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
         collectionView.performBatchUpdates(nil, completion: nil)
     }
+}
+
+extension FaqCollectionViewController : UISearchBarDelegate {
+    
 }
