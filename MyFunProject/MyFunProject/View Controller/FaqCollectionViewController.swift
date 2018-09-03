@@ -8,10 +8,11 @@
 
 import UIKit
 
-
-private let reuseIdentifier = "collectionCell"
+private let collectionCell = "collectionCell"
 
 class FaqCollectionViewController: UICollectionViewController {
+    
+    //MARK: - Properties
     
     lazy var searchBar : UISearchBar = {
         let sb = UISearchBar()
@@ -23,12 +24,30 @@ class FaqCollectionViewController: UICollectionViewController {
         return sb
     }()
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(FaqCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        navigationItem.title = "TroubleShoot"
+        collectionView?.register(FaqCollectionViewCell.self, forCellWithReuseIdentifier: collectionCell)
         setupViews()
         fetchFAQ()
+    }
+    
+    
+    //MARK: - Setup Views
+    func setupViews() {
+        navigationItem.title = "TroubleShoot"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonTapped))
+        
+        collectionView?.backgroundColor = UIColor(hexString: "#edefee")
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.keyboardDismissMode = .onDrag
+        collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerCellId")
+    }
+    
+    //MARK: - Functions
+    
+    @objc func backButtonTapped() {
+        print("Back button tapped")
     }
     
     func fetchFAQ() {
@@ -38,16 +57,9 @@ class FaqCollectionViewController: UICollectionViewController {
             }
         }
     }
-    
-    func setupViews() {
-        collectionView?.backgroundColor = UIColor(hexString: "#edefee")
-        collectionView?.alwaysBounceVertical = true
-        collectionView?.keyboardDismissMode = .onDrag
-        collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerCellId")
-    }
 }
 
-
+//MARK: - CollectionView Datasource/Delegate
 extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -69,16 +81,17 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FaqCollectionViewCell else { return UICollectionViewCell()}
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCell, for: indexPath) as? FaqCollectionViewCell else { return UICollectionViewCell()}
         let questions = FaqController.shared.questAns[indexPath.row].key
         cell.questionLabel.text = questions
         
         let answers = FaqController.shared.questAns[indexPath.row].theValue[0]
         cell.answerLabel.text = answers
         cell.answerLabel.isHidden = true
+        
         return cell
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 20
@@ -89,7 +102,6 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         
         switch collectionView.indexPathsForSelectedItems?.first {
         case .some(indexPath):
@@ -105,6 +117,8 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - SearchBar
 extension FaqCollectionViewController : UISearchBarDelegate {
     
+    //Implement searchbar functionality right here
 }
