@@ -11,55 +11,47 @@ import SwiftyJSON
 
 class FaqController {
     
-    typealias resultDictionary = [[String: String]]
-    
-    var results : [JSON] = []
+    //Source of truth
     var questAns: [Faq] = []
     
+    //MARK: - Properties
     static let shared = FaqController()
+     private let username = accessKey(keyname: "username")
+     private let password = accessKey(keyname: "password")
     
-    let username = "1234"
-    let password = "eyJhbGciOiJIUzI1NiJ9.eyJVU0lEIjoiNmVjZTZiZWUwYTRlMTlmMGE4MjdiNTM5MmI2NTRhNGM1MWYwMDNjOSIsInRzIjoxNTMzMzM5ODc0fQ.bT-2QxLiQfyqp3Ubwi_A3er77tX5feR9g1Ahx2iYjFw"
+    //MARK: - HTTP Request
     
-        func createRequest(completion: @escaping(JSON?) -> Void) {
-            let loginString = String(format: "%@:%@", username, password)
-            let loginData = loginString.data(using: String.Encoding.utf8)!
-            let base64LoginString = loginData.base64EncodedString()
+ func createRequest(completion: @escaping(JSON?) -> Void) {
     
-            let url = URL(string: "https://prep2.gw.gocopia.com/prep/faq")!
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-            request.addValue(password, forHTTPHeaderField: username)
+    let loginString = String(format: "%@:%@", username, password)
+    guard let loginData = loginString.data(using: String.Encoding.utf8) else { return }
+    let base64LoginString = loginData.base64EncodedString()
     
-            let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+    guard let url = URL(string: "https://prep2.gw.gocopia.com/prep/faq") else { return }
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+    request.addValue(password, forHTTPHeaderField: username)
     
-                let statusCode = (response as! HTTPURLResponse).statusCode
-                if statusCode == 200 {
-                    do {
-                        guard let data = data else { return }
-                        let json = try JSON(data: data)
-                        self.results = json.arrayValue
-                        self.questAns.removeAll()
-                        for (_, dictionaryValue) in json {
-                            for (key, value) in dictionaryValue {
-                                let valueArray = [value.description]
-                                let newQuestAns = Faq(opened: false, key: key, theValue: valueArray)
-                                self.questAns.append(newQuestAns)
-                            }
-                        }
-                        print(self.questAns.count)
-                        completion(json)
-                    } catch {
-                        print("Could not convert JSON data into a dictionary.")
-                        completion(nil)
-                        return
+    let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        if let data = data {
+            do {
+                let json = try JSON(data: data)
+                self.questAns.removeAll()
+                for (_, dictionaryValue) in json {
+                    for (key, value) in dictionaryValue {
+                        let valueArray = [value.description]
+                        let newQuestAns = Faq(opened: false, key: key, theValue: valueArray)
+                        self.questAns.append(newQuestAns)
                     }
                 }
+                completion(json)
+            } catch let error {
+                print("error converting data to json", error.localizedDescription)
             }
-            dataTask.resume()
         }
-    
     }
-    
-
+    dataTask.resume()
+}
+}
