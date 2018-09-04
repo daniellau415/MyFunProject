@@ -58,7 +58,8 @@ class FaqController {
     }
 }
 
-/*  Uncomment to use JSONSerialization instead of SwiftyJSON
+  //Uncomment to use JSONSerialization instead of SwiftyJSON
+    /*
     static func createRequest(completion: @escaping(Bool?) -> Void) {
 
         let base64LoginString = "MTIzNDpleUpoYkdjaU9pSklVekkxTmlKOS5leUpWVTBsRUlqb2lObVZqWlRaaVpXVXdZVFJsTVRsbU1HRTRNamRpTlRNNU1tSTJOVFJoTkdNMU1XWXdNRE5qT1NJc0luUnpJam94TlRNek16TTVPRGMwZlEuYlQtMlF4TGlRZnlxcDNVYndpX0EzZXI3N3RYNWZlUjlnMUFoeDJpWWpGdw=="
@@ -79,7 +80,7 @@ class FaqController {
                         for (key, value) in dictionary {
                             let valueArray = [value]
                             let newQuestAns = Faq(opened: false, key: key, theValue: valueArray)
-                            self.questAns.append(newQuestAns)
+                            self.faqs.append(newQuestAns)
                         }
                     }
                     completion(true)
@@ -93,5 +94,5 @@ class FaqController {
         dataTask.resume()
     }
 }
- 
-*/
+ */
+
