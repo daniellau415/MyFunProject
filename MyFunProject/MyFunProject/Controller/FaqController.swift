@@ -16,8 +16,8 @@ class FaqController {
     
     //MARK: - Properties
 
-    static let username = accessKey(keyname: "username")
-    static let password = accessKey(keyname: "password")
+    static private let username = accessKey(keyname: "username")
+    static private let password = accessKey(keyname: "password")
     
     //MARK: - HTTP Request
     
