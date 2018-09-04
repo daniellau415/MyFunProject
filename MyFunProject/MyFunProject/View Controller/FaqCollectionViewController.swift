@@ -51,7 +51,7 @@ class FaqCollectionViewController: UICollectionViewController {
     }
     
     func fetchFAQ() {
-        FaqController.shared.createRequest { (_) in
+        FaqController.createRequest { (_) in
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
@@ -77,16 +77,16 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return FaqController.shared.questAns.count
+        return FaqController.questAns.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCell, for: indexPath) as? FaqCollectionViewCell else { return UICollectionViewCell()}
-        let questions = FaqController.shared.questAns[indexPath.row].key
+        let questions = FaqController.questAns[indexPath.row].key
         cell.questionLabel.text = questions
         
-        let answers = FaqController.shared.questAns[indexPath.row].theValue[0]
+        let answers = FaqController.questAns[indexPath.row].theValue[0]
         cell.answerLabel.text = answers
         cell.answerLabel.isHidden = true
         
@@ -105,7 +105,7 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
         
         switch collectionView.indexPathsForSelectedItems?.first {
         case .some(indexPath):
-            return CGSize(width: view.frame.width - 60, height: 200.0)
+            return CGSize(width: view.frame.width - 60, height: 250.0)
         default:
             return CGSize(width: view.frame.width - 60, height: 100.0)
         }
