@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct Faq {
-    
-    var opened = Bool()
-    var key = String()
-    var theValue = [String]()
+struct Faq: Codable {
 
+    var question : String
+    var answers : String
 }
 
 

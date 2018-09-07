@@ -32,7 +32,6 @@ class FaqCollectionViewController: UICollectionViewController {
         fetchFAQ()
     }
     
-    
     //MARK: - Setup Views
     func setupViews() {
         navigationItem.title = "TroubleShoot"
@@ -83,10 +82,11 @@ extension FaqCollectionViewController : UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCell, for: indexPath) as? FaqCollectionViewCell else { return UICollectionViewCell()}
-        let questions = FaqController.faqs[indexPath.row].key
-        cell.questionLabel.text = questions
         
-        let answers = FaqController.faqs[indexPath.row].theValue[0]
+        let questions = FaqController.faqs[indexPath.row].question
+        let answers = FaqController.faqs[indexPath.row].answers
+        
+        cell.questionLabel.text = questions
         cell.answerLabel.text = answers
         cell.answerLabel.isHidden = true
         
